@@ -1415,7 +1415,7 @@ class Runner:
     def metadata_fetcher(
         xrootdtimeout: int, align_clusters: bool, item: FileMeta
     ) -> Accumulatable:
-        with uproot.open(item.filename, timeout=xrootdtimeout) as file:
+        with uproot.open({item.filename: None}, timeout=xrootdtimeout) as file:
             try:
                 tree = file[item.treename]
             except uproot.exceptions.KeyInFileError as e:
@@ -1574,7 +1574,7 @@ class Runner:
 
         if format == "root":
             filecontext = uproot.open(
-                item.filename,
+                {item.filename: None},
                 timeout=xrootdtimeout,
                 file_handler=uproot.MemmapSource
                 if mmap

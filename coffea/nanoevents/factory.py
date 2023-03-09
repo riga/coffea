@@ -223,7 +223,7 @@ class NanoEventsFactory:
             return events
 
         if isinstance(file, str):
-            tree = uproot.open(file, **uproot_options)[treepath]
+            tree = uproot.open({file: None}, **uproot_options)[treepath]
         elif isinstance(file, uproot.reading.ReadOnlyDirectory):
             tree = file[treepath]
         elif "<class 'uproot.rootio.ROOTDirectory'>" == str(type(file)):
